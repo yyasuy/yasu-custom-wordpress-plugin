@@ -11,10 +11,8 @@ License: GPL2
 
 require_once( 'lib.php' );
 
+// Add a page named 'Yasu Tools' in the admin menu.
 add_action( 'admin_menu', 'yasu_admin_menu' );
-add_action( 'media_buttons', 'yasu_media_buttons' );
-
-
 function yasu_admin_menu(){
 	add_menu_page( 'Personal convenient tools', 'Yasu Tools', 'manage_options', __FILE__, 'yasu_tools_page', 'dashicons-welcome-learn-more', 90 );
 }
@@ -56,9 +54,19 @@ function yasu_delete_kindle_highlight_position( $_text ){
 	return $_text;
 }
 
+// Add a button named 'Save' next to the Add Media button. Save button works the same as the Publish button.
+add_action( 'media_buttons', 'yasu_media_buttons' );
 function yasu_media_buttons(){
 	$script_file_url = plugins_url( 'save.js', __FILE__ );
 	printf( '<script src=%s></script>', $script_file_url );
 	printf( '<button id="yasu_save">Save</button>' );
+}
+
+add_filter( 'the_content', 'yasu_the_content' );
+function yasu_the_content( $_content ){
+	$published_date = get_the_date( 'Y年n月j日' );
+	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
+	$_content = $google_photo_link . $_content;
+	return $_content;
 }
 ?>
