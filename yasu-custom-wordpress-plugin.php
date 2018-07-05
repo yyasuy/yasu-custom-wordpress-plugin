@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Yasu's personal plugin
+Plugin Name: Yasu's personal wordpress plugin to make my life easy
 Plugin URI: https://github.com/yyasuy/yasu-custom-wordpress-plugin
 Description: This plugin is developed to ease my daily edits.
 Version: 1.0
