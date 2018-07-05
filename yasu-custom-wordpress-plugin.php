@@ -59,9 +59,10 @@ add_action( 'media_buttons', 'yasu_media_buttons' );
 function yasu_media_buttons(){
 	$script_file_url = plugins_url( 'save.js', __FILE__ );
 	printf( '<script src=%s></script>', $script_file_url );
-	printf( '<button id="yasu_save">Save</button>' );
+	printf( '<button id="yasu_save" class="button-primary">Save</button>' );
 }
 
+// Add a Google Photos link that shows the photos taken on the published date of the post.
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
 	$published_date = get_the_date( 'Y年n月j日' );
