@@ -70,4 +70,12 @@ function yasu_the_content( $_content ){
 	$_content = $google_photo_link . $_content;
 	return $_content;
 }
+
+// View the post right after updating it.
+add_filter( 'redirect_post_location', 'yasu_redirect_post_location' );
+function yasu_redirect_post_location( $_location ){
+	$post_id = get_the_ID();
+	$post_url = get_permalink( $_post_id );
+	return $post_url;
+}
 ?>
