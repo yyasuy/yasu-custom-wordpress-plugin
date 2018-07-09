@@ -65,9 +65,35 @@ function yasu_media_buttons(){
 // Add a Google Photos link that shows the photos taken on the published date of the post.
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
+	$post_id = get_the_ID();
+	$the_month = get_the_date( 'n', $post_id );
+	$the_day = get_the_date( 'j', $post_id );
+	$args = array(
+		'category_name' => 'Blog',
+		'post_type' => 'post',
+		'post_status' => 'publish',
+		'monthnum' => $the_month,
+		'day' => $the_day,
+	);
+	$posted_year_id_array = array();
+	$query = new WP_Query( $args );
+	if( $query->have_posts() ){
+		while( $query->have_posts() ){
+			$query->the_post();
+			$post_id = get_the_ID();
+			$posted_year = get_the_date( 'Y', $post_id );
+			array_push( $posted_year_id_array, array( 'ID' => $post_id, 'Year' => $posted_year ) );
+		}
+	}
+	wp_reset_postdata();
+	$posted_on_the_same_day = '';
+	foreach( $posted_year_id_array as $year_id_pair ){
+		$posted_on_the_same_day .= sprintf( '<a href="%s">%s</a> ', get_permalink( $year_id_pair[ 'ID' ] ), $year_id_pair[ 'Year' ] );
+	}
+
 	$published_date = get_the_date( 'Y年n月j日' );
 	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
-	$_content = $google_photo_link . $_content;
+	$_content = $google_photo_link . $_content . $posted_on_the_same_day;
 	return $_content;
 }
 
