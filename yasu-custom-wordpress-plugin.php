@@ -95,16 +95,9 @@ function yasu_the_content( $_content ){
 	$posts_on_the_same_day = '<p>' . $posts_on_the_same_day . '</p>';
 
 	$published_date = get_the_date( 'Y年n月j日' );
+
 	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
 	$_content = $google_photo_link . $_content . $posts_on_the_same_day;
-	$posted_on_the_same_day = '';
-	foreach( $posted_year_id_array as $year_id_pair ){
-		$posted_on_the_same_day .= sprintf( '<a href="%s">%s</a> ', get_permalink( $year_id_pair[ 'ID' ] ), $year_id_pair[ 'Year' ] );
-	}
-
-	$published_date = get_the_date( 'Y年n月j日' );
-	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
-	$_content = $google_photo_link . $_content . $posted_on_the_same_day;
 	return $_content;
 }
 
