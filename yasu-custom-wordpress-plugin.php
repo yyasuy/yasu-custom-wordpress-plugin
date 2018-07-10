@@ -66,6 +66,14 @@ function yasu_media_buttons(){
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
 	$post_id = get_the_ID();
+	$cats = get_the_category( $post_id );
+	$is_blog = false;
+	foreach( $cats as $cat ){
+		$cat_name = $cat->name;
+		if( $cat_name == 'Blog' ) $is_blog = true;	
+	}
+	if( $is_blog == false ) return $_content;
+
 	$the_year = get_the_date( 'Y', $post_id );
 	$the_month = get_the_date( 'n', $post_id );
 	$the_day = get_the_date( 'j', $post_id );
