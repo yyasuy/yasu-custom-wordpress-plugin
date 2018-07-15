@@ -21,6 +21,7 @@ function yasu_tools_page(){
 	$_text = _get_request_param( 'text' );
 	$_text = yasu_zenkaku_number_to_hankaku_number( $_text );
 	$_text = yasu_delete_kindle_highlight_position( $_text );
+	$_text = yasu_delete_unwanted_spaces( $_text );
 	printf( '<div>' );
 	printf( '<h1>Enter source text you want to convert.</h1>' );
 	printf( '</div>' );
@@ -51,6 +52,12 @@ function yasu_zenkaku_number_to_hankaku_number( $_text ){
 
 function yasu_delete_kindle_highlight_position( $_text ){
 	$_text = preg_replace( '/^.+ハイライト.+位置.+$/m', '', $_text );
+	return $_text;
+}
+
+function yasu_delete_unwanted_spaces( $_text ){
+	$_text = preg_replace( '/([^\w]) +([^\w])/m', '$1$2', $_text ); // Remove spaces between 2byte characters.
+	$_text = preg_replace( '/^ +/', '', $_text ); // Remove leading spaces of a line.
 	return $_text;
 }
 
