@@ -138,4 +138,20 @@ function yasu_redirect_post_location( $_location ){
 	$post_url = get_permalink( $_post_id );
 	return $post_url;
 }
+
+// Add my custom shortcode. The shortcode [child_page] will show the list of child pages under the current page.
+add_shortcode( 'child_pages', 'yasu_child_pages' );
+function yasu_child_pages(){
+	$page_id = get_the_ID();
+	$args = array(
+		'post_parent' => $page_id,
+	);
+	$child_pages = get_children( $args, 'OBJECT' );
+	$content = sprintf( '<ul>' );
+	foreach( $child_pages as $child_page ){
+		$content .= sprintf( '<li><a href="%s">%s</a></li>', get_permalink( $child_page->ID ), $child_page->post_title );
+	}
+	$content .= sprintf( '</ul>' );
+	return $content;
+}
 ?>
