@@ -58,6 +58,8 @@ function yasu_zenkaku_number_to_hankaku_number( $_text ){
 		'1方' => '一方',
 		'1定' => '一定',
 		'唯1' => '唯一',
+		'1見' => '一見',
+		'1部' => '一部',
 	);
 	foreach( $undo_conv_array as $old => $new ){
 		$_text = str_replace( $old, $new, $_text );
