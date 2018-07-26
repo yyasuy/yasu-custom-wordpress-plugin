@@ -115,14 +115,17 @@ function yasu_the_content( $_content ){
 			$query->the_post();
 			$post_id = get_the_ID();
 			$posted_year = get_the_date( 'Y', $post_id );
-			if( $posted_year == $the_year ) continue;
 			array_push( $posted_year_id_array, array( 'ID' => $post_id, 'Year' => $posted_year ) );
 		}
 	}
 	wp_reset_postdata();
 	$posts_on_the_same_day = '';
 	foreach( $posted_year_id_array as $year_id_pair ){
-		$posts_on_the_same_day .= sprintf( '<a href="%s">%s</a> ', get_permalink( $year_id_pair[ 'ID' ] ), $year_id_pair[ 'Year' ] );
+		if( $year_id_pair[ 'Year' ] != $the_year ){
+			$posts_on_the_same_day .= sprintf( '<a href="%s">%s</a> ', get_permalink( $year_id_pair[ 'ID' ] ), $year_id_pair[ 'Year' ] );
+		}else{
+			$posts_on_the_same_day .= sprintf( '%s ', $year_id_pair[ 'Year' ] );
+		}
 	}
 	$posts_on_the_same_day = '<p>' . $posts_on_the_same_day . '</p>';
 
