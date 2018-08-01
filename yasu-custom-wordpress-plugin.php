@@ -89,6 +89,15 @@ function yasu_media_buttons(){
 	printf( '<button id="yasu_save" class="button-primary">Save</button>' );
 }
 
+add_action( 'wp_head', 'yasu_wp_head' );
+function yasu_wp_head(){
+	// < Google Photos 
+	$script_file_url = plugins_url( 'gphotos.js', __FILE__ );
+	printf( '<script src=%s></script>', $script_file_url );
+	printf( '<script src="https://apis.google.com/js/client.js?onload=y_gapi_onload"></script>' );
+	// Google Photos >
+}
+
 // Add a Google Photos link that shows the photos taken on the published date of the post.
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
@@ -132,10 +141,16 @@ function yasu_the_content( $_content ){
 	}
 	$posts_on_the_same_day = '<p>' . $posts_on_the_same_day . '</p>';
 
-	$published_date = get_the_date( 'Y年n月j日' );
+	//$published_date = get_the_date( 'Y年n月j日' );
+	$published_date = get_the_date( 'Y m j' );
 
 	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
-	$_content = $google_photo_link . $_content . $posts_on_the_same_day;
+
+	$google_photo_thumbs = sprintf( '<div class="thumbs" id="%s" data-year="%s" data-month="%s" data-day="%s"></div>',
+	                                 get_the_date( 'Ymj' ), get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'j' ) );
+
+	$_content = $google_photo_link . $google_photo_thumbs . $_content . $posts_on_the_same_day;
+
 	return $_content;
 }
 
