@@ -92,7 +92,7 @@ function yasu_media_buttons(){
 add_action( 'wp_head', 'yasu_wp_head' );
 function yasu_wp_head(){
 	// < Google Photos 
-	$script_file_url = plugins_url( 'gphotos.js', __FILE__ );
+	$script_file_url = plugins_url( 'google_photos.js', __FILE__ );
 	printf( '<script src=%s></script>', $script_file_url );
 	printf( '<script src="https://apis.google.com/js/client.js?onload=y_gapi_onload"></script>' );
 	// Google Photos >
