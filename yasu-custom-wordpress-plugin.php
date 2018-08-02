@@ -147,7 +147,7 @@ function yasu_the_content( $_content ){
 	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
 
 	$google_photo_thumbs = sprintf( '<div class="thumbs" id="%s" data-year="%s" data-month="%s" data-day="%s"></div>',
-	                                 get_the_date( 'Ymj' ), get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'j' ) );
+	                                 get_the_date( 'Ymd' ), get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) );
 
 	$_content = $google_photo_link . $google_photo_thumbs . $_content . $posts_on_the_same_day;
 
