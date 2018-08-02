@@ -101,6 +101,7 @@ function yasu_wp_head(){
 // Add a Google Photos link that shows the photos taken on the published date of the post.
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
+
 	$post_id = get_the_ID();
 	$cats = get_the_category( $post_id );
 	$is_blog = false;
@@ -141,10 +142,9 @@ function yasu_the_content( $_content ){
 	}
 	$posts_on_the_same_day = '<p>' . $posts_on_the_same_day . '</p>';
 
-	//$published_date = get_the_date( 'Y年n月j日' );
-	$published_date = get_the_date( 'Y m j' );
+	$search_keyword_for_published_date = get_the_date( 'l F d Y' ); // e.g. Sunday July 22 2018
 
-	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $published_date );
+	$google_photo_link = sprintf( '<p><a href="https://photos.google.com/search/%s" target="_blank">この日の写真</a></p>', $search_keyword_for_published_date );
 
 	$google_photo_thumbs = sprintf( '<div class="thumbs" id="%s" data-year="%s" data-month="%s" data-day="%s"></div>',
 	                                 get_the_date( 'Ymd' ), get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) );
