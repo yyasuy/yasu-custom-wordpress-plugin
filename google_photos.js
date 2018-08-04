@@ -83,8 +83,10 @@ function y_get_photo_thumbs(){
 					     ( '0' + ( Number( d.getMonth() ) + 1 ).toString() ).slice( -2 ).toString() +
 					     ( '0' + d.getDate().toString() ).slice( -2 ).toString(); // 20170101
 					//console.log( id );
+					var img_url = _data.mediaItems[ i ].productUrl;
 					var thumb_url = _data.mediaItems[ i ].baseUrl + '=h100-w100-c';
-					img_html = '<img src="' + thumb_url + '"/>';
+					//img_html = '<img src="' + thumb_url + '"/>';
+					img_html = '<a href="' + img_url + '" target = "_blank"><img src="' + thumb_url + '"/></a>';
 					$( '#' + id ).append( img_html );
 				}
 			} );
