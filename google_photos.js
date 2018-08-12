@@ -45,7 +45,7 @@ function y_get_photo_thumbs(){
 		var day;
 		var date;
 		$( '.thumbs' ).each( function( _i, _obj ){
-			id = $( this ).attr( 'id' );
+			//id = $( this ).attr( 'id' );
 			year = $( this ).attr( 'data-year' );
 			month = $( this ).attr( 'data-month' );
 			day = $( this ).attr( 'data-day' );
@@ -82,13 +82,16 @@ function y_get_photo_thumbs(){
 					id = d.getFullYear().toString() +
 					     ( '0' + ( Number( d.getMonth() ) + 1 ).toString() ).slice( -2 ).toString() +
 					     ( '0' + d.getDate().toString() ).slice( -2 ).toString(); // 20170101
-					//console.log( id );
+					//console.log( 'created: ' + created );
+					//console.log( 'id: ' + id );
 					var img_url = _data.mediaItems[ i ].productUrl;
 					var thumb_url = _data.mediaItems[ i ].baseUrl + '=h100-w100-c';
 					//img_html = '<img src="' + thumb_url + '"/>';
 					img_html = '<a href="' + img_url + '" target = "_blank"><img src="' + thumb_url + '"/></a>';
+					//console.log( img_html );
 					$( '#' + id ).append( img_html );
 				}
+				//console.log( _data.mediaItems.length );
 			} );
 		} );
 	} );
