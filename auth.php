@@ -3,7 +3,7 @@ require_once( 'lib.php' );
 $json = json_decode( file_get_contents( '/var/www/auth/wordpress/.secure.json' ), true );
 $_passcode = _get_request_param( 'passcode' );
 if( $json[ 'HASH' ] == crypt( $_passcode, $json[ 'SALT' ] ) ){
-	setcookie( "yasu_auth", "OK", time() + 120, "/" );
+	setcookie( "yasu_auth", "OK", time() + 60 * 60 * 24 * 30, "/" );
 	header( 'location: /wordpress/' );
 }
 ?>
