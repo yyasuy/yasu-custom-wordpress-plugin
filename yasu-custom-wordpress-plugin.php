@@ -98,12 +98,31 @@ function yasu_wp_head(){
 	printf( '<script src=%s></script>', $script_file_url );
 	printf( '<script src="https://apis.google.com/js/client.js?onload=y_gapi_onload"></script>' );
 	// Google Photos >
+
+	// < Auth
+	$auth_file_url = plugins_url( 'auth.php', __FILE__ );
+?>
+	<script>
+	var auth = false;
+	var cookies = document.cookie.split( ';' );
+	cookies.forEach( function( _cookie ){
+		var name_value = _cookie.split( '=' );
+		var name = name_value[ 0 ].trim();
+		var value = name_value[ 1 ].trim();
+		if( name == 'yasu_auth' && value == 'OK' ) auth = true;
+	} );
+	if( auth == false ){
+		var auth_url = "<?php printf( $auth_file_url ); ?>"
+		location.href = auth_url;
+	}
+	</script>
+<?php
+	// Auth >
 }
 
 // Add a Google Photos link that shows the photos taken on the published date of the post.
 add_filter( 'the_content', 'yasu_the_content' );
 function yasu_the_content( $_content ){
-
 	$post_id = get_the_ID();
 	$cats = get_the_category( $post_id );
 	$is_blog = false;
