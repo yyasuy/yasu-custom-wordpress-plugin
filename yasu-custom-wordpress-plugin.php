@@ -65,6 +65,9 @@ function yasu_zenkaku_number_to_hankaku_number( $_text ){
 		'1連' => '一連',
 		'1慣' => '一貫',
 		'1変' => '一変',
+		'1員' => '一員',
+		'統1' => '統一',
+		'3田会' => '三田会',
 	);
 	foreach( $undo_conv_array as $old => $new ){
 		$_text = str_replace( $old, $new, $_text );
