@@ -73,6 +73,10 @@ function yasu_zenkaku_number_to_hankaku_number( $_text ){
 		'1口' => '一口',
 		'9州' => '九州',
 		'1角' => '一角',
+		'3菱' => '三菱',
+		'3井' => '三井',
+		'3和' => '三和',
+		'1流' => '一流',
 	);
 	foreach( $undo_conv_array as $old => $new ){
 		$_text = str_replace( $old, $new, $_text );
