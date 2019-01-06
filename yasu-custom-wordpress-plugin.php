@@ -45,6 +45,7 @@ function yasu_zenkaku_number_to_hankaku_number( $_text ){
 
 function yasu_delete_kindle_highlight_position( $_text ){
 	$_text = preg_replace( '/^.+ハイライト.+位置.+$/m', '', $_text );
+	$_text = preg_replace( '/^.+highlight.+Location.+$/m', '', $_text );
 	return $_text;
 }
 
