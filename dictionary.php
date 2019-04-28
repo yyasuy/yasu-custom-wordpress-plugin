@@ -13,6 +13,7 @@ $CONV_ARRAY = array(
 );
 
 $UNDO_CONV_ARRAY = array(
+	'1瞬' => '一瞬',
 	'統1' => '統一',
 	'1般' => '一般',
 	'1大' => '一大',
